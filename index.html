@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Premier League Predictions</title>
+
+<!-- Google Font -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+
+<!-- GSAP -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+<!-- Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<style>
+:root {
+  --bg: #0B1220;
+  --secondary: #111827;
+  --card: #1F2937;
+  --primary: #3B82F6;
+  --accent: #60A5FA;
+  --green: #22C55E;
+  --text: #F9FAFB;
+  --subtext: #9CA3AF;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: radial-gradient(circle at top, #0f1b35, #0B1220);
+  color: var(--text);
+  overflow-x: hidden;
+}
+
+/* GLOBAL */
+section {
+  padding: 100px 20px;
+  max-width: 1100px;
+  margin: auto;
+}
+
+h1 {
+  font-size: 56px;
+  font-weight: 800;
+  letter-spacing: -1px;
+}
+
+h2 {
+  font-size: 36px;
+  margin-bottom: 20px;
+}
+
+p {
+  color: var(--subtext);
+  font-size: 17px;
+}
+
+.btn {
+  padding: 16px 34px;
+  border-radius: 14px;
+  text-decoration: none;
+  font-weight: 600;
+  display: inline-block;
+  transition: all 0.3s ease;
+}
+
+.primary {
+  background: linear-gradient(135deg, var(--primary), var(--accent));
+  color: white;
+  box-shadow: 0 0 20px rgba(59,130,246,0.4);
+}
+
+.primary:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 0 35px rgba(96,165,250,0.7);
+}
+
+/* HERO */
+.hero {
+  text-align: center;
+  padding-top: 140px;
+  position: relative;
+}
+
+.hero::after {
+  content: "";
+  position: absolute;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(59,130,246,0.25), transparent);
+  top: -100px;
+  left: 50%;
+  transform: translateX(-50%);
+  filter: blur(80px);
+  z-index: -1;
+}
+
+.hero p {
+  margin: 20px 0 30px;
+  font-size: 18px;
+}
+
+/* STATS */
+.stats {
+  display: flex;
+  justify-content: space-between;
+  gap: 40px;
+  text-align: center;
+  flex-wrap: wrap;
+}
+
+.stat {
+  flex: 1;
+}
+
+.stat h2 {
+  font-size: 42px;
+  color: var(--green);
+}
+
+/* CARDS */
+.cards {
+  display: flex;
+  gap: 25px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.card {
+  background: rgba(31,41,55,0.5);
+  backdrop-filter: blur(14px);
+  padding: 25px;
+  border-radius: 18px;
+  width: 280px;
+  border: 1px solid rgba(255,255,255,0.06);
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 18px;
+  background: linear-gradient(120deg, transparent, rgba(96,165,250,0.2), transparent);
+  opacity: 0;
+  transition: 0.3s;
+}
+
+.card:hover::before {
+  opacity: 1;
+}
+
+.card:hover {
+  transform: translateY(-8px) scale(1.03);
+  box-shadow: 0 0 30px rgba(59,130,246,0.3);
+}
+
+/* GRAPH */
+canvas {
+  margin-top: 40px;
+  background: rgba(17,24,39,0.6);
+  border-radius: 16px;
+  padding: 20px;
+}
+
+/* CTA */
+.cta {
+  text-align: center;
+  padding-bottom: 120px;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  h1 { font-size: 36px; }
+  h2 { font-size: 28px; }
+}
+</style>
+</head>
+
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <h1>AI Premier League Predictions</h1>
+  <p>Data-driven insights. Proven results.</p>
+  <a href="https://discord.gg/YOUR-LINK-HERE" class="btn primary">Join Free Discord</a>
+</section>
+
+<!-- STATS -->
+<section class="reveal">
+  <div class="stats">
+    <div class="stat">
+      <h2 class="counter" data-target="2000">0</h2>
+      <p>Members</p>
+    </div>
+    <div class="stat">
+      <h2 class="counter" data-target="85">0</h2>
+      <p>Win Rate %</p>
+    </div>
+    <div class="stat">
+      <h2 class="counter" data-target="10000">0</h2>
+      <p>Predictions</p>
+    </div>
+  </div>
+</section>
+
+<!-- MATCHES -->
+<section class="reveal">
+  <h2 style="text-align:center;">AI Predictions</h2>
+  <div class="cards">
+    <div class="card"><h3>Arsenal vs Chelsea</h3><p>Arsenal Win: 62%</p></div>
+    <div class="card"><h3>Liverpool vs Everton</h3><p>Liverpool Win: 70%</p></div>
+    <div class="card"><h3>Man City vs Spurs</h3><p>City Win: 68%</p></div>
+  </div>
+</section>
+
+<!-- GRAPH -->
+<section class="reveal">
+  <h2 style="text-align:center;">Performance Growth</h2>
+  <canvas id="chart"></canvas>
+</section>
+
+<!-- REVIEWS -->
+<section class="reveal">
+  <h2 style="text-align:center;">What Members Say</h2>
+  <div class="cards">
+    <div class="card">“Made profit in week 1. Unreal system.”</div>
+    <div class="card">“Actually data-driven, not guessing.”</div>
+    <div class="card">“Best betting community I’ve joined.”</div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta reveal">
+  <h2>Join Discord for Full Access</h2>
+  <br>
+  <a href="https://discord.gg/YOUR-LINK-HERE" class="btn primary">Join Now</a>
+</section>
+
+<script>
+gsap.registerPlugin(ScrollTrigger);
+
+/* HERO animation */
+gsap.from(".hero h1", {y: -60, opacity: 0, duration: 1.2, ease: "power2.out"});
+gsap.from(".hero p", {y: 20, opacity: 0, delay: 0.3, duration: 1});
+gsap.from(".hero .btn", {opacity: 0, delay: 0.6, duration: 1});
+
+/* Scroll reveal */
+gsap.utils.toArray(".reveal").forEach(section => {
+  gsap.from(section, {
+    opacity: 0,
+    y: 60,
+    duration: 1,
+    ease: "power2.out",
+    scrollTrigger: {
+      trigger: section,
+      start: "top 80%"
+    }
+  });
+});
+
+/* Counter */
+document.querySelectorAll('.counter').forEach(counter => {
+  let update = () => {
+    let target = +counter.dataset.target;
+    let count = +counter.innerText;
+    let inc = target / 80;
+    if(count < target){
+      counter.innerText = Math.ceil(count + inc);
+      requestAnimationFrame(update);
+    } else {
+      counter.innerText = target;
+    }
+  }
+  ScrollTrigger.create({
+    trigger: counter,
+    onEnter: update,
+    once: true
+  });
+});
+
+/* Chart */
+new Chart(document.getElementById('chart'), {
+  type: 'line',
+  data: {
+    labels: ['W1','W2','W3','W4','W5'],
+    datasets: [{
+      data: [10,25,40,65,90],
+      borderColor: '#60A5FA',
+      backgroundColor: 'rgba(96,165,250,0.15)',
+      tension: 0.4,
+      fill: true
+    }]
+  },
+  options: {
+    plugins: { legend: { display: false }},
+    scales: {
+      x: { ticks: { color: '#9CA3AF' }},
+      y: { ticks: { color: '#9CA3AF' }}
+    }
+  }
+});
+</script>
+
+</body>
+</html>
